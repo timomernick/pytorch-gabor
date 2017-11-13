@@ -68,7 +68,7 @@ class Generator(nn.Module):
         g1 = torch.cos((2.0 * math.pi * (x1 / lambda_)) + phi)
         #print("g1", g1.size())
 
-        g_real = (g0 * g1) * self.sigmoid(self.amplitude)
+        g_real = (g0 * g1) * self.amplitude
         #print("g", g.size())
 
         return g_real
