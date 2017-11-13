@@ -30,6 +30,7 @@ class Generator(nn.Module):
         self.phi = nn.Parameter(torch.randn(1) * 0.02)
         self.sigma = nn.Parameter(torch.randn(1) * 1.0)
         self.gamma = nn.Parameter(torch.randn(1) * 0.0)
+        self.amplitude = nn.Parameter(torch.randn(1))
         self.position = nn.Parameter(torch.randn(2) * 0.5)
 
         self.sigmoid = nn.Sigmoid()
@@ -67,7 +68,7 @@ class Generator(nn.Module):
         g1 = torch.cos((2.0 * math.pi * (x1 / lambda_)) + phi)
         #print("g1", g1.size())
 
-        g_real = g0 * g1
+        g_real = (g0 * g1) * self.sigmoid(self.amplitude)
         #print("g", g.size())
 
         return g_real
